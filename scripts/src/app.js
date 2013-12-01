@@ -1,5 +1,6 @@
 define(['backbone', 'jquery', 'underscore', 'scripts/src/Router'], function (Backbone, $, _, Router) {
  var initialize = function(){
+ 	//Calls the routers initialize function
  	Router.initialize();
  	};
  return {
