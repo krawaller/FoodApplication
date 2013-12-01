@@ -1,9 +1,8 @@
-define(['backbone', 'jquery', 'scripts/views/appView'], function (Backbone, $, AppView) {
+define(['backbone', 'jquery', 'underscore', 'scripts/src/Router'], function (Backbone, $, _, Router) {
+ var initialize = function(){
+ 	Router.initialize();
+ 	};
  return {
-		start: function(){ 
-		var appView = new AppView({ el : "#hello" });
-		appView.render();
-		Backbone.history.start();
-	}
- }
+ 	initialize: initialize
+ };
 });
