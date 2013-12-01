@@ -1,5 +1,5 @@
 // This is my router. There are many like it, but this one is mine. My router is my best friend. It is my life.
-define(["backbone", "jquery"], function(Backbone, $){
+define(["backbone", "jquery", "scripts/views/appView"], function(Backbone, $, appView){
 	var AppRouter = Backbone.Router.extend({
 		//Adding routes
 		routes: {
@@ -11,6 +11,8 @@ define(["backbone", "jquery"], function(Backbone, $){
 		//Adding functions to run when the router finds the correct url
 		index: function(){
 			console.log("Index");
+			var AppView = new appView({ el: "#hello"});
+			AppView.render();
 		},
 		createfoodlist: function(){
 			console.log("createfoodlist");
