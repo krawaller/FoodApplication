@@ -7,6 +7,7 @@ define(["backbone", "jquery", "jade!templates/createDish", "scripts/models/Dish"
 		},
 		render: function(){
 			this.$el.empty();
+			console.log("wat");
 			this.$el.append(template({ingredients:this.dish.ingredients}));
 			return this;
 		},
@@ -18,8 +19,8 @@ define(["backbone", "jquery", "jade!templates/createDish", "scripts/models/Dish"
 			if(e.keyCode != 13) return;
 			if(!this.$("#addIngredient").val()) return;
 			console.log("Value of ingredient just added: " + $("#addIngredient").val());
-			this.dish.ingredients[this.dish.ingredients.length + 1] = $("#addIngredient").val();
-			//this.dish.addIngredient($("#addIngredient").val());
+			this.dish.addIngredient($("#addIngredient").val());
+			console.log(this.dish.ingredients);
 			this.$("#addIngredient").val('');
 			//this.render();
 		},

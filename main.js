@@ -2,22 +2,20 @@ require.config({
   paths: {
     jquery: 'scripts/vendor/jquery/jquery',
     underscore: 'scripts/vendor/underscore/underscore',
-    backbone: 'scripts/vendor/backbone/backbone',
+    purebackbone: 'scripts/vendor/Backbone/purebackbone',
     jade: 'scripts/vendor/Jade/load_jade',
-    'backbone.localStorage': "scripts/vendor/backbone-localStorage/backbone-localStorage"
+    backbone: 'scripts/vendor/Backbone/backbone',
+    'backbone-localStorage': "scripts/vendor/backbone-localStorage/backbone-localStorage"
   },
   shim: {
     underscore:{
   		exports: "_"
   	},
-  	backbone:{
+  	purebackbone:{
   		deps: ['underscore', 'jquery'],
   		exports: 'Backbone'
   	},
-  	'backbone-localStorage':{
-  		deps: ['backbone'],
-  		exports: 'Backbone'
-  	}
+  	'backbone-localStorage':["purebackbone", "underscore"]
   }
 });
 
