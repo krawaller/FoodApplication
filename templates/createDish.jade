@@ -1,4 +1,16 @@
-div.createDishDiv
-p
-	| Title
-input.addIngredient(type="text", name="title")
+.row
+	.col-md-offset-4.col-md-4
+		#createDishDiv
+			form(role="form")
+				.form-group
+					label(for="title") Title
+					input#title.form-control(type="text", name="title", placeholder="Recipe Title...")
+				.form-group
+					label(for="addIngredient") Ingredient
+					input#addIngredient.form-control(type="text", name="ingredient", placeholder="Ingredient to add..")
+				button.btn.btn-default(type="button") Finish
+		#listIngredientsDiv
+			if typeof ingredients != "undefined"
+				if ingredients != ""
+					each(ingredient in ingredients)
+						h4=ingredient.name()

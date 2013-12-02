@@ -1,24 +1,35 @@
 define(["backbone", "jquery", "jade!templates/createDish", "scripts/models/Dish", "scripts/models/Ingredient"], function(Backbone, $, template, Dish, Ingredient){
 	return Backbone.View.extend({
-		tagName: "li",
 		template: template,
 		initialize: function() {
+			this.dish = new Dish();
 			//Dish.Fetch();
 		},
 		render: function(){
 			this.$el.empty();
-			this.$el.append(template());
+			this.$el.append(template({ingredients:this.dish.ingredients}));
 			return this;
 		},
 		events: {
-			"keypress .addIngredient"	: "createOnEnter"
+			"keypress #addIngredient"	: "createOnEnter",
+			"click .btn"				: "finishRecipe"
 		},
 		createOnEnter: function(e){
 			if(e.keyCode != 13) return;
-			if(!this.input.val()) return;
-
-			//Ingredient.create({title: this.input.val()});
-			this.input.val('');
+			if(!this.$("#addIngredient").val()) return;
+			console.log("Value of ingredient just added: " + $("#addIngredient").val());
+			this.dish.ingredients[this.dish.ingredients.length + 1] = $("#addIngredient").val();
+			//this.dish.addIngredient($("#addIngredient").val());
+			this.$("#addIngredient").val('');
+			//this.render();
+		},
+		finishRecipe: function(){
+			if(!this.$("#title").val()){
+				console.log("Can't have a recipe without a title!");
+				return;	
+			} 
+			this.dish.title = this.$("#title").val();
+			console.log(this.dish.title);
 		}
 	});
 });
