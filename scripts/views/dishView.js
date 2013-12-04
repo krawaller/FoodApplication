@@ -3,7 +3,6 @@ define(["backbone", "jquery", "jade!templates/createDish", "scripts/models/Dish"
 		template: template,
 		initialize: function() {
 			this.dish = new Dish();
-			//Dish.Fetch();
 		},
 		render: function(){
 			this.$el.empty();
