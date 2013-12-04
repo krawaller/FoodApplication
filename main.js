@@ -5,7 +5,7 @@ require.config({
     purebackbone: 'scripts/vendor/Backbone/purebackbone',
     jade: 'scripts/vendor/Jade/load_jade',
     backbone: 'scripts/vendor/Backbone/backbone',
-    'backbone-localStorage': "scripts/vendor/backbone-localStorage/backbone-localStorage"
+    'backbone-localStorage': "scripts/vendor/Backbone/backbone-localStorage"
   },
   shim: {
     underscore:{
