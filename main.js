@@ -1,7 +1,7 @@
 require.config({
   paths: {
-    jquery: 'scripts/vendor/jquery/jquery',
-    underscore: 'scripts/vendor/underscore/underscore',
+    jquery: 'scripts/vendor/JQuery/jquery',
+    underscore: 'scripts/vendor/Underscore/underscore',
     purebackbone: 'scripts/vendor/Backbone/purebackbone',
     jade: 'scripts/vendor/Jade/load_jade',
     backbone: 'scripts/vendor/Backbone/backbone',
