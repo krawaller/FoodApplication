@@ -5,7 +5,6 @@ define(["backbone", "jquery", "jade!templates/createDish"], function(Backbone, $
 		},
 		template: template,
 		initialize: function() {
-			this.collection.on('all', this.render, this);
 			if(!this.get("name")){
 				this.set({"name": this.defaults().name});
 			}

@@ -1,5 +1,5 @@
 // This is my router. There are many like it, but this one is mine. My router is my best friend. It is my life.
-define(["backbone", "jquery", "scripts/views/appView", "scripts/views/dishView", "scripts/collection/FoodList"], function(Backbone, $, appView, dishView, FoodList){
+define(["backbone", "jquery", "scripts/views/appView", "scripts/views/dishView", "scripts/collection/FoodList", "scripts/views/ingredientView"], function(Backbone, $, appView, dishView, FoodList, ingredientView){
 	var AppRouter = Backbone.Router.extend({
 		//Adding routes
 		routes: {
@@ -12,7 +12,7 @@ define(["backbone", "jquery", "scripts/views/appView", "scripts/views/dishView",
 		index: function(){
 			console.log("Index");
 			var foodlist = new FoodList();
-			foodlist.Fetch({
+			foodlist.fetch({
 				success: function(){
 					var AppView = new appView({ el: "#hello"});
 					AppView.render();
@@ -28,6 +28,8 @@ define(["backbone", "jquery", "scripts/views/appView", "scripts/views/dishView",
 		createdish: function(){
 			var DishView = new dishView({ el: "#hello"});
 			DishView.render();
+			var IngredientView = new ingredientView({ collection: DishView.dish.ingredients });
+			IngredientView.render();
 		}
 	});
 	//initialize thingy

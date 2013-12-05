@@ -1,17 +1,13 @@
-define(["backbone", "jquery", "scripts/models/Ingredient"], function(Backbone, $, Ingredient){
+define(["backbone", "jquery", "scripts/models/Ingredient", "scripts/collection/Ingredients"], function(Backbone, $, Ingredient, Ingredients){
 	return Backbone.Model.extend({
 		defaults: {
-			title: "",
-			ingredients: []
+			title: ""
 		},
-		title: function(){ return this.get('title'); },
-		ingredients: function(){ return this.get('ingredients'); },
 		addIngredient: function(value) {
-			console.log(value);
-			this.ingredients[this.ingredients.length] = value;
+			this.ingredients.add(new Ingredient({name:value}));
 		},
 		initialize: function(){
-			this.ingredients = [];
+			this.ingredients = new Ingredients();
 		}
 	});
 });

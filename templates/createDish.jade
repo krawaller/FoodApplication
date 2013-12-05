@@ -10,7 +10,3 @@
 					input#addIngredient.form-control(type="text", name="ingredient", placeholder="Ingredient to add..")
 				button.btn.btn-default(type="button") Finish
 		#listIngredientsDiv
-			if typeof ingredients != "undefined"
-				if ingredients != ""
-					each(ingredient in ingredients)
-						h4=ingredient.name()
