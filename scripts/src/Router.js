@@ -28,6 +28,7 @@ define(["backbone", "jquery", "scripts/views/appView", "scripts/views/dishView",
 		createdish: function(){
 			var DishView = new dishView({ el: "#hello"});
 			DishView.render();
+			console.log(DishView.dish.ingredients);
 			var IngredientView = new ingredientView({ collection: DishView.dish.ingredients });
 			IngredientView.render();
 		}

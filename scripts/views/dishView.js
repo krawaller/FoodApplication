@@ -3,10 +3,12 @@ define(["backbone", "jquery", "jade!templates/createDish", "scripts/models/Dish"
 		template: template,
 		initialize: function() {
 			this.dish = new Dish();
+			this.dish.ingredients.on("change", this.render(), this);
 		},
 		render: function(){
+			var title = this.$el.find("#title").val();
 			this.$el.empty();
-			this.$el.append(template());
+			this.$el.append(template({ingredients: this.dish.ingredients.models, title: title}));
 			return this;
 		},
 		events: {
