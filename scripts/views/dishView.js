@@ -3,7 +3,8 @@ define(["backbone", "jquery", "jade!templates/createDish", "scripts/models/Dish"
 		template: template,
 		initialize: function() {
 			this.dish = new Dish();
-			this.dish.ingredients.on("change", this.render(), this);
+			//Y U NO WORK?!
+			//this.dish.ingredients.on("change", this.render(), this);
 		},
 		render: function(){
 			var title = this.$el.find("#title").val();
@@ -21,6 +22,7 @@ define(["backbone", "jquery", "jade!templates/createDish", "scripts/models/Dish"
 			console.log("Value of ingredient just added: " + $("#addIngredient").val());
 			this.dish.addIngredient($("#addIngredient").val());
 			this.$("#addIngredient").val('');
+			this.render();
 		},
 		finishRecipe: function(){
 			if(!this.$("#title").val()){
