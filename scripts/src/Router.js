@@ -1,46 +1,43 @@
 // This is my router. There are many like it, but this one is mine. My router is my best friend. It is my life.
-define(["backbone", "jquery", "scripts/views/appView", "scripts/views/dishView", "scripts/collection/FoodList", "scripts/views/ingredientView"], function(Backbone, $, appView, dishView, FoodList, ingredientView){
+define(["backbone", "jquery", "scripts/views/appView", "scripts/views/dishView", "scripts/views/ingredientView", "scripts/collection/FoodList"], function(Backbone, $, appView, dishView, ingredientView, FoodList){
 	var AppRouter = Backbone.Router.extend({
 		//Adding routes
 		routes: {
 			"": "index",
-			"createfoodlist": "createfoodlist",
-			"editfoodlist": "editfoodlist",
-			"createdish": "createdish"
+	//		"createfoodlist": "createfoodlist",
+			"editfoodlist/:id": "editfoodlist",
+			"createdish": "createdish",
+			"showdish/:id": "showdish"
 		},
 		//Adding functions to run when the router finds the correct url
 		index: function(){
 			console.log("Index");
-			var foodlist = new FoodList();
-			foodlist.fetch({
-				success: function(){
-					var AppView = new appView({ el: "#hello"});
-					AppView.render();
+			var that = this;
+			this.collection.fetch({
+				success: function(dishes){
+					that.AppView.render();
 				}
-			});
+			})
 		},
-		createfoodlist: function(){
-			console.log("createfoodlist");
+	//	createfoodlist: function(){
+	//		console.log("createfoodlist");
+	//	},
+		showdish: function(id){
+			console.log("showdish");
 		},
-		editfoodlist: function(){
+		editfoodlist: function(id){
 			console.log("editfoodlist");
 		},
 		createdish: function(){
-			var DishView = new dishView({ el: "#hello"});
-			DishView.render();
-			console.log(DishView.dish.ingredients);
-			var IngredientView = new ingredientView({ collection: DishView.dish.ingredients });
-			IngredientView.render();
+			this.DishView = new dishView({el: "#hello", collection: this.collection});
+			this.DishView.render();
+		},
+		//Initialize
+		initialize: function(){
+			this.collection = new FoodList();
+			this.AppView = new appView({ el: "#hello", collection: this.collection});
+			Backbone.history.start();
 		}
 	});
-	//initialize thingy
-	var initialize = function(){
-		//Creating a new router object
-		var app_router = new AppRouter();
-
-		Backbone.history.start();
-	}
-	return {
-		initialize: initialize
-	};
+	return AppRouter;
 });

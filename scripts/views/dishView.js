@@ -10,6 +10,7 @@ define(["backbone", "jquery", "jade!templates/createDish", "scripts/models/Dish"
 			var title = this.$el.find("#title").val();
 			this.$el.empty();
 			this.$el.append(template({ingredients: this.dish.ingredients.models, title: title}));
+			this.$el.find("#addIngredient").focus();
 			return this;
 		},
 		events: {
@@ -29,7 +30,16 @@ define(["backbone", "jquery", "jade!templates/createDish", "scripts/models/Dish"
 				console.log("Can't have a recipe without a title!");
 				return;	
 			} 
-			this.dish.title = this.$("#title").val();
+			this.dish.set({"title": this.$("#title").val()});
+			if(this.dish.isValid())
+			{
+				this.collection.create(this.dish);
+				console.log("Item is added to collection");
+			}
+			else if(!this.dish.isValid())
+			{
+				console.log(this.dish.validationError);
+			}
 		}
 	});
 });

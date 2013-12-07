@@ -1,0 +1,9 @@
+.row
+	.col-md-offset-4.col-md-4
+		h1= "FoodApplication"
+		a.text-center(href="#createdish")= "Create new dish"
+		#foodlistDiv
+			if typeof foodlist != "undefined"
+				if foodlist != ""
+					each dish in foodlist
+						h4= dish.get('title')

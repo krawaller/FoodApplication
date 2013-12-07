@@ -1,11 +1,20 @@
-define(["backbone", "jquery", "jade!templates/main"],function(Backbone, $, template){
+define(["backbone", "jquery", "jade!templates/foodlist", "scripts/collection/FoodList"],function(Backbone, $, template, FoodList){
 	return Backbone.View.extend({
 		initialize: function(){
 			console.log("Initializing appView");
+		//	this.collection.on('all', this.render, this);
+		//	this.foodlist = new FoodList();
+		//	this.foodlist.fetch({
+		//		success: function(){
+		//			return;
+		//		}
+		//	});
 		},
 		template: template,
 		render: function(){
-			this.$el.append(template({ hello: "Hello world" }));
+			this.$el.empty();
+			console.log(this.collection.models);
+			this.$el.append(template({ foodlist: this.collection.models }));
 			console.log("Appending appView Template");
 			return this;
 		}

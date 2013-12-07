@@ -19,6 +19,6 @@ require.config({
   }
 });
 
-require(['scripts/src/app'], function(App) {
-  App.initialize();
+require(['scripts/src/Router'], function(Router) {
+  new Router();
 });
