@@ -26,15 +26,16 @@ define(["backbone", "jquery", "jade!templates/createDish", "scripts/models/Dish"
 			this.render();
 		},
 		finishRecipe: function(){
-			if(!this.$("#title").val()){
+			if(!this.$("#title").val().trim()){
 				console.log("Can't have a recipe without a title!");
 				return;	
 			} 
-			this.dish.set({"title": this.$("#title").val()});
+			this.dish.set({"title": this.$("#title").val().trim()});
 			if(this.dish.isValid())
 			{
 				this.collection.create(this.dish);
 				console.log("Item is added to collection");
+				document.location.href = window.location.toString().split("#")[0];
 			}
 			else if(!this.dish.isValid())
 			{
