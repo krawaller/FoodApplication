@@ -4,15 +4,17 @@ define(["backbone", "jquery", "underscore", "jade!templates/showDish", "scripts/
 		template: template,
 		initialize: function() {
 			this.ingredients = new Ingredients();
-			this.ingredients.fetch();
-			console.log(this.ingredients);
-			this.dishIngredients = this.ingredients.where({dishTitle: this.model.get('title')});
-			console.log(this.dishIngredients);
 		},
 		render: function(){
-			this.$el.empty();
-			this.$el.append(template({ingredients: this.ingredients.models, title: this.model.get('title')}));
-			return this;
+			var that = this;
+			this.ingredients.fetch({
+				success: function(models){
+					that.dishIngredients = models.where({dishTitle: that.model.get('title')});
+					that.$el.empty();
+					that.$el.append(template({ingredients: that.dishIngredients, title: that.model.get('title')}));
+					return that;
+				}
+			});
 		}
 	});
 });
