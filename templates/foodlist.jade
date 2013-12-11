@@ -6,4 +6,5 @@
 			if typeof foodlist != "undefined"
 				if foodlist != ""
 					each dish in foodlist
-						h4= dish.get('title')
+						li
+							a.dishes(href="#showdish/" + dish.get('title'))= dish.get('title')

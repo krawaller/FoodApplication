@@ -1,5 +1,5 @@
-define(["backbone", "jquery", "underscore", "jade!templates/createDish", "scripts/models/Dish", "scripts/views/ingredientView", "scripts/collection/ingredients"], 
-	function(Backbone, $, _, template, Dish, ingrediView, Ingredients){
+define(["backbone", "jquery", "underscore", "jade!templates/createDish", "scripts/models/Dish", "scripts/views/ingredientView", "scripts/collection/ingredients", "scripts/models/Ingredient"], 
+	function(Backbone, $, _, template, Dish, ingrediView, Ingredients, Ingredient){
 	return Backbone.View.extend({
 		template: template,
 		initialize: function() {
@@ -10,17 +10,8 @@ define(["backbone", "jquery", "underscore", "jade!templates/createDish", "script
 		},
 		render: function(){
 			var title = this.$el.find("#title").val();
-			if(!this.ingredients == "undefined")
-			{
-				this.ingredients.fetch({
-					success: function(){
-						this.dishIngredients = this.ingredients.where({ dishTitle: title})
-					}
-				});
-			}
-			console.log(this.dishIngredients);
 			this.$el.empty();
-			this.$el.append(template({ingredients: this.dishIngredients.models, title: title}));
+			this.$el.append(template({ingredients: this.dishIngredients, title: title}));
 			this.$el.find("#addIngredient").focus();
 			return this;
 		},
@@ -32,12 +23,12 @@ define(["backbone", "jquery", "underscore", "jade!templates/createDish", "script
 			if(e.keyCode != 13) return;
 			if(!this.$("#addIngredient").val()) return;
 			console.log("Value of ingredient just added: " + $("#addIngredient").val());
-			this.addIngredient($("#addIngredient").val());
+			this.addingredient($("#addIngredient").val());
 			this.$("#addIngredient").val('');
 			this.render();
 		},
 		addingredient: function(value){
-			this.dishIngredients[dishIngredients.length] = value;
+			this.dishIngredients[this.dishIngredients.length] = value;
 		},
 		finishRecipe: function(){
 			if(!this.$("#title").val().trim()){
@@ -57,13 +48,11 @@ define(["backbone", "jquery", "underscore", "jade!templates/createDish", "script
 
 			for(var i = 0; i < this.dishIngredients.length; i++)
 			{
-				this.ingredients.create(new Ingredient(name:this.dishIngredients[i], dishTitle:this.dish.get('title')))
+				this.ingredients.create(new Ingredient({name:this.dishIngredients[i], dishTitle:this.dish.get('title')}));
 			}
-			
 			if(this.dish.isValid())
 			{
 				this.collection.create(this.dish);
-				console.log("Item is added to collection");
 				document.location.href = window.location.toString().split("#")[0];
 			}
 			else if(!this.dish.isValid())

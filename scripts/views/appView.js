@@ -11,12 +11,18 @@ define(["backbone", "jquery", "jade!templates/foodlist", "scripts/collection/Foo
 		//	});
 		},
 		template: template,
+		events:{
+			"click": "showdish"
+		},
 		render: function(){
 			this.$el.empty();
 			console.log(this.collection.models);
 			this.$el.append(template({ foodlist: this.collection.models }));
 			console.log("Appending appView Template");
 			return this;
+		},
+		showdish: function(){
+			
 		}
 	});
 });

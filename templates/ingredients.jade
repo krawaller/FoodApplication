@@ -2,5 +2,5 @@
 	.col-md-offset-4.col-md-4
 		if typeof ingredients != "undefined"
 			if ingredients != ""
-				each ingredient in ingredients
-					h4= ingredient.name()
+				for ingredient in ingredients
+					h4= ingredient

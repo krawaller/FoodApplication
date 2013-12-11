@@ -1,0 +1,10 @@
+#dishTitleDiv.row
+	.col-md-offset-4.col-md-4
+		h3= title
+#listIngredientsDiv.row
+	.col-md-offset-4.col-md-4
+		if typeof ingredients != "undefined"
+			if ingredients != ""
+				ul
+					each ingredient in ingredients
+						li= ingredient
