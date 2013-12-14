@@ -16,7 +16,7 @@ define(["backbone", "jquery", "scripts/views/appView", "scripts/views/createDish
 			var that = this;
 			this.collection.fetch({
 				success: function(dishes){
-					this.AppView = new appView({ el: "#hello", collection: this.collection});
+					this.AppView = new appView({ el: "#hello", collection: that.collection});
 					this.AppView.render();
 				}
 			});
