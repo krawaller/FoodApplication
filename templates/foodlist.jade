@@ -7,4 +7,6 @@
 				if foodlist != ""
 					each dish in foodlist
 						li
-							a.dishes(href="#showdish/" + dish.get('title'))= dish.get('title')
+							.dishes
+								h3(data-id=dish.get('title')).dishtitle= dish.get('title')
+								img(src="http://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Ps-x-button.png/603px-Ps-x-button.png").deletedish

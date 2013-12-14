@@ -16,7 +16,8 @@ define(["backbone", "jquery", "scripts/views/appView", "scripts/views/createDish
 			var that = this;
 			this.collection.fetch({
 				success: function(dishes){
-					that.AppView.render();
+					this.AppView = new appView({ el: "#hello", collection: this.collection});
+					this.AppView.render();
 				}
 			});
 		},
@@ -36,7 +37,7 @@ define(["backbone", "jquery", "scripts/views/appView", "scripts/views/createDish
 				}
 			});
 		},
-		editfoodlist: function(id){
+		editfoodlist: function(dishName){
 			console.log("editfoodlist");
 		},
 		createdish: function(){
@@ -46,7 +47,6 @@ define(["backbone", "jquery", "scripts/views/appView", "scripts/views/createDish
 		//Initialize
 		initialize: function(){
 			this.collection = new FoodList();
-			this.AppView = new appView({ el: "#hello", collection: this.collection});
 			Backbone.history.start();
 		}
 	});

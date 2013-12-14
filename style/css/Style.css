@@ -1,0 +1,19 @@
+.deletedish{
+	max-width:30px;
+	max-height:30px;
+	visibility:hidden;
+}
+.dishes{
+	min-height:50px;
+	display:block;
+}
+h3{
+	max-width: 240px;
+}
+.showbutton{
+	visibility:visible;
+	z-index: 999;
+}
+.right{
+	float:right;
+}
