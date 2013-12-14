@@ -50,19 +50,9 @@ define(["backbone", "jquery", "underscore", "jade!templates/createDish", "script
 			{
 				this.ingredients.create({name:this.dishIngredients[i], dishTitle:this.dish.get('title')});
 			}
-			console.log(this.ingredients);
-			if(this.dish.isValid())
-			{
-				console.log("adding dish");
-				this.collection.add(this.dish);
-				console.log("dish now added to");
-				console.log(this.collection.models);
-				//document.location.href = window.location.toString().split("#")[0];
-			}
-			else if(!this.dish.isValid())
-			{
-				console.log(this.dish.validationError);
-			}
+			
+			this.collection.add(this.dish);
+			document.location.href = window.location.toString().split("#")[0];
 		}
 	});
 });
