@@ -5,25 +5,21 @@ define(["backbone", "jquery", "scripts/views/appView", "scripts/views/createDish
 		//Adding routes
 		routes: {
 			"": "index",
-	//		"createfoodlist": "createfoodlist",
-			"editfoodlist/:id": "editfoodlist",
 			"createdish": "createdish",
 			"showdish/:id": "showdish"
 		},
 		//Adding functions to run when the router finds the correct url
 		index: function(){
 			console.log("Index");
+			console.log(this.collection);
 			var that = this;
 			this.collection.fetch({
 				success: function(dishes){
-					this.AppView = new appView({ el: "#hello", collection: that.collection});
-					this.AppView.render();
+					that.AppView = new appView({ el: "#hello", collection: that.collection});
+					that.AppView.render();
 				}
 			});
 		},
-	//	createfoodlist: function(){
-	//		console.log("createfoodlist");
-	//	},
 		showdish: function(dishName){
 			console.log("showdish " + dishName);
 			var dishname = dishName;
@@ -32,13 +28,10 @@ define(["backbone", "jquery", "scripts/views/appView", "scripts/views/createDish
 					var dish = dishes.find(function(model){
 						return model.get('title') == dishname;
 					});
-					this.ShowDishView = new showDishView({ el: "#hello", model:dish});//,dish: dishes.find({title:{id}}) });
-					this.ShowDishView.render();
+					that.ShowDishView = new showDishView({ el: "#hello", model:dish});
+					that.ShowDishView.render();
 				}
 			});
-		},
-		editfoodlist: function(dishName){
-			console.log("editfoodlist");
 		},
 		createdish: function(){
 			this.DishView = new createDishView({el: "#hello", collection: this.collection});

@@ -51,8 +51,10 @@ define(["backbone", "jquery", "underscore", "jade!templates/createDish", "script
 				this.ingredients.create({name:this.dishIngredients[i], dishTitle:this.dish.get('title')});
 			}
 			
-			this.collection.add(this.dish);
-			document.location.href = window.location.toString().split("#")[0];
+			this.collection.create(this.dish);
+			console.log(this.dish);
+			console.log(this.collection);
+			//document.location.href = window.location.toString().split("#")[0];
 		}
 	});
 });

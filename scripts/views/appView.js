@@ -2,13 +2,7 @@ define(["backbone", "jquery", "underscore", "jade!templates/foodlist", "scripts/
 	return Backbone.View.extend({
 		initialize: function(){
 			console.log("Initializing appView");
-		//	this.collection.on('all', this.render, this);
-		//	this.foodlist = new FoodList();
-		//	this.foodlist.fetch({
-		//		success: function(){
-		//			return;
-		//		}
-		//	});
+			this.collection.on('all', this.render, this);
 		},
 		template: template,
 		events:{
@@ -26,14 +20,11 @@ define(["backbone", "jquery", "underscore", "jade!templates/foodlist", "scripts/
 			document.location.href += "#showdish/" + $(e.currentTarget).html();
 		},
 		deletedish: function(e){
-			var id = $(e.currentTarget).closest('h3').html();//parent().children('h3').data('id');
+			var id = $(e.currentTarget).closest('h3').html();
 			console.log(id);
 			if(id !== "")
 			{
 				var model = this.collection.where({title: id})
-				//(function(){
-				//	return model.get('title') == id;
-				//});
 				if(confirm("Are you sure you want to delete this dish?"))
 				{
 					model[0].destroy();
