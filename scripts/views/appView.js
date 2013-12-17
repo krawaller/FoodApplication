@@ -17,7 +17,7 @@ define(["backbone", "jquery", "underscore", "jade!templates/foodlist", "scripts/
 			return this;
 		},
 		showdish: function(e){
-			document.location.href += "#showdish/" + $(e.currentTarget).html();
+			document.location.href = window.location.toString().split("#")[0] + "#showdish/" + $(e.currentTarget).html();
 		},
 		deletedish: function(e){
 			var id = $(e.currentTarget).closest('h3').html();

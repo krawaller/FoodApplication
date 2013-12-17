@@ -1,4 +1,4 @@
-define(["backbone", "jquery", "underscore", "jade!templates/showDish", "scripts/collection/ingredients"], 
+define(["backbone", "jquery", "underscore", "jade!templates/showDish", "scripts/collection/Ingredients"], 
 	function(Backbone, $, _, template, Ingredients){
 	return Backbone.View.extend({
 		template: template,

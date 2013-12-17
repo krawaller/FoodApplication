@@ -1,12 +1,10 @@
-define(["backbone", "jquery", "underscore", "jade!templates/createDish", "scripts/models/Dish", "scripts/views/ingredientView", "scripts/collection/ingredients", "scripts/models/Ingredient"], 
+define(["backbone", "jquery", "underscore", "jade!templates/createDish", "scripts/models/Dish", "scripts/views/ingredientView", "scripts/collection/Ingredients", "scripts/models/Ingredient"], 
 	function(Backbone, $, _, template, Dish, ingrediView, Ingredients, Ingredient){
 	return Backbone.View.extend({
 		template: template,
 		initialize: function() {
-			this.dish = new Dish();
 			this.ingredients = new Ingredients();
 			this.dishIngredients = [];
-			//this.dish.ingredients.on("change", this.render(), this);
 		},
 		render: function(){
 			var title = this.$el.find("#title").val();
@@ -44,16 +42,13 @@ define(["backbone", "jquery", "underscore", "jade!templates/createDish", "script
 					return;
 				}
 			}
-			this.dish.set({"title": this.$("#title").val().trim()});
+			var title = this.$("#title").val().trim();
 
 			for(var i = 0; i < this.dishIngredients.length; i++)
 			{
-				this.ingredients.create({name:this.dishIngredients[i], dishTitle:this.dish.get('title')});
+				this.ingredients.create({name:this.dishIngredients[i], dishTitle:title});
 			}
-			
-			this.collection.create(this.dish);
-			console.log(this.dish);
-			console.log(this.collection);
+			this.collection.create(new Dish({title: title}));
 			//document.location.href = window.location.toString().split("#")[0];
 		}
 	});
