@@ -11,7 +11,6 @@ define(["backbone", "jquery", "scripts/views/appView", "scripts/views/createDish
 		//Adding functions to run when the router finds the correct url
 		index: function(){
 			console.log("Index");
-			console.log(this.collection);
 			var that = this;
 			this.collection.fetch({
 				success: function(dishes){
@@ -28,8 +27,8 @@ define(["backbone", "jquery", "scripts/views/appView", "scripts/views/createDish
 					var dish = dishes.find(function(model){
 						return model.get('title') == dishname;
 					});
-					that.ShowDishView = new showDishView({ el: "#hello", model:dish});
-					that.ShowDishView.render();
+					this.ShowDishView = new showDishView({ el: "#hello", model:dish});
+					this.ShowDishView.render();
 				}
 			});
 		},
