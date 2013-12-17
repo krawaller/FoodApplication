@@ -1,6 +1,6 @@
 // This is my router. There are many like it, but this one is mine. My router is my best friend. It is my life.
-define(["backbone", "jquery", "scripts/views/appView", "scripts/views/createDishView", "scripts/views/ingredientView", "scripts/collection/FoodList", "scripts/views/showDishView"], 
-	function(Backbone, $, appView, createDishView, ingredientView, FoodList, showDishView){
+define(["backbone", "jquery", "underscore", "scripts/views/appView", "scripts/views/createDishView", "scripts/views/ingredientView", "scripts/collection/FoodList", "scripts/views/showDishView"], 
+	function(Backbone, $, _, AppView, CreateDishView, IngredientView, FoodList, ShowDishView){
 	var AppRouter = Backbone.Router.extend({
 		//Adding routes
 		routes: {
@@ -14,8 +14,8 @@ define(["backbone", "jquery", "scripts/views/appView", "scripts/views/createDish
 			var that = this;
 			this.collection.fetch({
 				success: function(dishes){
-					that.AppView = new appView({ el: "#hello", collection: that.collection});
-					that.AppView.render();
+					that.appView = new AppView({ el: "#hello", collection: that.collection});
+					that.appView.render();
 				}
 			});
 		},
@@ -27,14 +27,17 @@ define(["backbone", "jquery", "scripts/views/appView", "scripts/views/createDish
 					var dish = dishes.find(function(model){
 						return model.get('title') == dishname;
 					});
-					this.ShowDishView = new showDishView({ el: "#hello", model:dish});
-					this.ShowDishView.render();
+					this.showDishView = new ShowDishView({ el: "#hello", model:dish});
+					this.showDishView.render();
 				}
 			});
 		},
 		createdish: function(){
-			this.DishView = new createDishView({el: "#hello", collection: this.collection});
-			this.DishView.render();
+			this.dishView = new CreateDishView({el: "#hello", collection: this.collection});
+			this.listenTo(this.DishView, "newDishDone", _.bind(function(){
+				this.navigate("",{trigger:true});
+			}));
+			this.dishView.render();
 		},
 		//Initialize
 		initialize: function(){
