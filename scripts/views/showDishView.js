@@ -28,7 +28,7 @@ define(["backbone", "jquery", "underscore", "jade!templates/showDish", "scripts/
 		},
 		render: function(){
 			var that = this;
-			this.ingredients.fetch({
+			this.collection.fetch({
 				success: function(models){
 					that.dishIngredients = models.where({dishTitle: that.model.get('title')});
 					that.$el.empty();

@@ -22,12 +22,13 @@ define(["backbone", "jquery", "underscore", "scripts/views/appView", "scripts/vi
 		showdish: function(dishName){
 			console.log("showdish " + dishName);
 			var dishname = dishName;
+			var that = this;
 			this.collection.fetch({
 				success: function(dishes){
 					var dish = dishes.find(function(model){
 						return model.get('title') == dishname;
 					});
-					this.showDishView = new ShowDishView({ el: "#hello", model:dish});
+					this.showDishView = new ShowDishView({ el: "#hello", model:dish, collection: that.collection});
 					this.showDishView.render();
 				}
 			});
