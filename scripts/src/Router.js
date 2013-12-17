@@ -34,9 +34,9 @@ define(["backbone", "jquery", "underscore", "scripts/views/appView", "scripts/vi
 		},
 		createdish: function(){
 			this.dishView = new CreateDishView({el: "#hello", collection: this.collection});
-			this.listenTo(this.dishView, "newDishDone", _.bind(function(){
+			this.listenTo(this.dishView, "newDishDone", function(){
 				this.navigate("",{trigger:true});
-			}));
+			});
 			this.dishView.render();
 		},
 		//Initialize
