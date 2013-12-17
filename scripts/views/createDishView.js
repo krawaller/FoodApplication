@@ -3,7 +3,6 @@ define(["backbone", "jquery", "underscore", "jade!templates/createDish", "script
 	return Backbone.View.extend({
 		template: template,
 		initialize: function() {
-			this.ingredients = new Ingredients();
 			this.dishIngredients = [];
 		},
 		render: function(){
@@ -11,7 +10,7 @@ define(["backbone", "jquery", "underscore", "jade!templates/createDish", "script
 			this.$el.empty();
 			this.$el.append(template({ingredients: this.dishIngredients, title: title}));
 			this.$el.find("#addIngredient").focus();
-			return this;
+			//return this;
 		},
 		events: {
 			"keypress #addIngredient"	: "createOnEnter",
@@ -26,7 +25,7 @@ define(["backbone", "jquery", "underscore", "jade!templates/createDish", "script
 			this.render();
 		},
 		addingredient: function(value){
-			this.dishIngredients[this.dishIngredients.length] = value;
+			this.dishIngredients.push(value);
 		},
 		finishRecipe: function(){
 			if(!this.$("#title").val().trim()){

@@ -1,4 +1,4 @@
-define(["backbone", "jquery", "underscore", "jade!templates/foodlist", "scripts/collection/FoodList"],function(Backbone, $, _, template, FoodList){
+define(["backbone", "jquery", "underscore", "jade!templates/foodlist"],function(Backbone, $, _, template){
 	return Backbone.View.extend({
 		initialize: function(){
 			console.log("Initializing appView");
@@ -14,19 +14,26 @@ define(["backbone", "jquery", "underscore", "jade!templates/foodlist", "scripts/
 		render: function(){
 			this.$el.empty();
 			this.$el.append(template({ foodlist: this.collection.models }));
-			return this;
+			//return this;
 		},
 		showdish: function(e){
-			document.location.href = window.location.toString().split("#")[0] + "#showdish/" + $(e.currentTarget).html();
+			var id = $(e.currentTarget).html();
+			this.trigger("showDish", {dishTitle:id});
 		},
 		deletedish: function(e){
-			var id = $(e.currentTarget).closest('h3').html();
+			var id = $(e.currentTarget).parent().children('h3').html();
 			console.log(id);
 			if(id !== "")
 			{
 				var model = this.collection.where({title: id})
+				console.log(model);
 				if(confirm("Are you sure you want to delete this dish?"))
 				{
+					//FIX THIS
+					for(var i = this.ingredients.length - 1; i >= 0; i--)
+					{
+						this.ingredients.where({dishTitle: id}).remove();
+					}
 					model[0].destroy();
 				}
 				else
