@@ -2,8 +2,9 @@ define(["backbone", "jquery", "underscore", "jade!templates/createDish", "script
 	function(Backbone, $, _, template, Dish, ingrediView, Ingredients, Ingredient){
 	return Backbone.View.extend({
 		template: template,
-		initialize: function() {
+		initialize: function(options) {
 			this.dishIngredients = [];
+			this.ingredients = options.ingredients;
 		},
 		render: function(){
 			var title = this.$el.find("#title").val();

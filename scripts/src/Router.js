@@ -18,12 +18,16 @@ define(["backbone", "jquery", "underscore", "scripts/views/appView", "scripts/vi
 			var that = this;
 			this.collection.fetch({
 				success: function(dishes){
-					that.appView = new AppView({ el: "#hello", collection: that.collection});
-					that.listenTo(that.appView, "showDish", function(dishTitle){
-						that.navigate("showdish/" + dishTitle.dishTitle, {trigger:true});
+					that.ingredients.fetch({
+						success:function(ingredients){
+							that.appView = new AppView({ el: "#hello", collection: that.collection, ingredients: ingredients});
+							that.listenTo(that.appView, "showDish", function(dishTitle){
+								that.navigate("showdish/" + dishTitle.dishTitle, {trigger:true});
+							});
+							that.appView.render();
+							$("#hello").append(that.appView.el);
+						}
 					});
-					that.appView.render();
-					$("#hello").append(that.appView.el);
 				}
 			});
 		},
@@ -50,12 +54,17 @@ define(["backbone", "jquery", "underscore", "scripts/views/appView", "scripts/vi
 			{
 				this.dishView.remove();
 			}
-			this.dishView = new CreateDishView({el: "#hello", collection: this.collection, ingredients:this.ingredients});
-			this.listenTo(this.dishView, "newDishDone", function(){
-				this.navigate("",{trigger:true});
+			var that = this;
+			this.ingredients.fetch({
+				success:function(ingredients){
+					that.dishView = new CreateDishView({el: "#hello", collection: that.collection, ingredients:that.ingredients});
+					that.listenTo(that.dishView, "newDishDone", function(){
+						that.navigate("",{trigger:true});
+					});
+					that.dishView.render();
+					$("#hello").append(that.dishView.el);
+				}
 			});
-			this.dishView.render();
-			$("#hello").append(this.dishView.el);
 		},
 		//Initialize
 		initialize: function(){

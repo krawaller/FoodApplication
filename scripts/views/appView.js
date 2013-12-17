@@ -1,8 +1,11 @@
 define(["backbone", "jquery", "underscore", "jade!templates/foodlist"],function(Backbone, $, _, template){
 	return Backbone.View.extend({
-		initialize: function(){
+		initialize: function(options){
 			console.log("Initializing appView");
 			this.collection.on('all', this.render, this);
+			console.log(options.ingredients);
+			this.ingredients = options.ingredients;
+			console.log(this.ingredients);
 		},
 		template: template,
 		events:{
@@ -29,11 +32,8 @@ define(["backbone", "jquery", "underscore", "jade!templates/foodlist"],function(
 				console.log(model);
 				if(confirm("Are you sure you want to delete this dish?"))
 				{
-					//FIX THIS
-					for(var i = this.ingredients.length - 1; i >= 0; i--)
-					{
-						this.ingredients.where({dishTitle: id}).remove();
-					}
+					//Removing all ingredients with this parent
+					this.ingredients.remove(this.ingredients.where({dishTitle: id}));
 					model[0].destroy();
 				}
 				else
