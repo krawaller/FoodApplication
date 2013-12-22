@@ -2,7 +2,8 @@ define(["backbone", "jquery", "underscore", "jade!templates/showDish", "scripts/
 	function(Backbone, $, _, template, Ingredients){
 	return Backbone.View.extend({
 		template: template,
-		initialize: function() {
+		initialize: function(options) {
+			this.ingredients = options.ingredients;
 		},
 		events : {
 			"click .h3title": "editTitle",
@@ -24,22 +25,24 @@ define(["backbone", "jquery", "underscore", "jade!templates/showDish", "scripts/
 					return;
 				}
 			}
-
-			this.model.set({"title": this.$(".titleinput").val().trim()});
-			$(".titleinput").replaceWith("<h3 class='h3title'>" + this.model.get('title') + "</h3>");
-		},
-		render: function(){
 			var that = this;
-			this.collection.fetch({
+			this.ingredients.fetch({
 				success: function(models){
-					console.log(models);
-					that.dishIngredients = models.where({dishTitle: that.model.get('title')});
-					console.log(that.dishIngredients);
-					that.$el.empty();
-					that.$el.append(template({ingredients: that.dishIngredients, title: that.model.get('title')}));
-					//return that;
+					that.model.set({"title": that.$(".titleinput").val().trim()});
+					for(var i = 0; i < that.ingredients.models.length; i++)
+					{
+						that.ingredients.models[i].set({"dishTitle": that.model.get('title')});
+					}
+					$(".titleinput").replaceWith("<h3 class='h3title'>" + that.model.get('title') + "</h3>");
 				}
 			});
+		},
+		render: function(){
+			console.log(models);
+			this.dishIngredients = models.where({dishTitle: this.model.get('title')});
+			console.log(this.dishIngredients);
+			this.$el.empty();
+			this.$el.append(template({ingredients: this.dishIngredients, title: this.model.get('title')}));
 		}
 	});
 });
