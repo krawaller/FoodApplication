@@ -11,13 +11,13 @@ define(["backbone", "jquery", "underscore", "scripts/collection/DishList", "scri
 		//Adding functions to run when the router finds the correct url
 		index: function(){
 		//	if(this.appView){this.appView.remove();}
-			console.log("Index");
+			console.log("Index route");
 			var that = this;
 			this.collection.fetch({
 				success: function(dishes){
 					that.ingredients.fetch({
 						success:function(ingredients){
-							$("#hello").append(that.masterView.renderall(dishes));
+							$("#hello").append(that.masterView.renderall(dishes).el);
 	//						that.appView = new AppView({ el: "#hello", collection: that.collection, ingredients: ingredients});
 	//						that.listenTo(that.appView, "showDish", function(dishTitle){
 	//							that.navigate("showdish/" + dishTitle.dishTitle, {trigger:true});
@@ -37,7 +37,7 @@ define(["backbone", "jquery", "underscore", "scripts/collection/DishList", "scri
 					var dish = dishes.find(function(model){
 						return model.get('title') == dishName;
 					});
-					$("#hello").append(that.masterView.renderone(dish));
+					$("#hello").append(that.masterView.renderone(dish).el);
 	//				that.showDishView = new ShowDishView({ el: "#hello", model:dish, collection:that.collection, ingredients:that.ingredients});
 	//				that.showDishView.collection = that.ingredients;
 	//				that.showDishView.render();
@@ -50,7 +50,7 @@ define(["backbone", "jquery", "underscore", "scripts/collection/DishList", "scri
 			var that = this;
 			this.ingredients.fetch({
 				success:function(ingredients){
-					$("#hello").append(that.masterView.rendercreate());
+					$("#hello").append(that.masterView.rendercreate().el);
 	//				that.dishView = new CreateDishView({el:"#hello", collection:that.collection, ingredients:ingredients});
 	//				that.listenTo(that.dishView, "newDishDone", function(){
 	//					that.navigate("",{trigger:true});
