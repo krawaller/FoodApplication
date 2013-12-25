@@ -11,16 +11,17 @@ define(["backbone", "jquery", "underscore", "jade!templates/foodlist"],function(
 			"click .deletedish": "deletedish",
 			"mouseenter .dishes": "hoverOn",
 			"mouseleave .dishes": "hoverOff"
-		},
+		},//Renders stuff.
 		render: function(){
 			this.$el.empty();
 			this.$el.append(template({ foodlist: this.collection.models }));
-			//return this;
-		},
+			return this;
+		},//Triggers the showdish event to the masterview
 		showdish: function(e){
+			//Gets the PrimaryID of the dish (unique names n stuff.)
 			var id = $(e.currentTarget).html();
 			this.trigger("showDish", {dishTitle:id});
-		},
+		},//Deletes dishes
 		deletedish: function(e){
 			var id = $(e.currentTarget).parent().children('h3').html();
 			console.log(id);
@@ -39,10 +40,10 @@ define(["backbone", "jquery", "underscore", "jade!templates/foodlist"],function(
 					return;
 				}
 			}
-		},
+		},//Shows the delete button when the dish is hovered
 		hoverOn: function(e){
 			$(e.currentTarget).parent().find(".deletedish").addClass("showbutton");
-		},
+		},//Hides the delete button when you don't hover over a dish
 		hoverOff: function(e){
 			$(e.currentTarget).parent().find(".deletedish").removeClass("showbutton");
 		}

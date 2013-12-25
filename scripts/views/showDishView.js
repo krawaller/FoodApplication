@@ -4,15 +4,15 @@ define(["backbone", "jquery", "underscore", "jade!templates/showDish", "scripts/
 		template: template,
 		initialize: function(options) {
 			this.ingredients = options.ingredients;
-		},
+		}, //Events for this view
 		events : {
 			"click .h3title": "editTitle",
 			"keypress .titleinput": "finishEdit"
-		},
+		}, //Edit the title..
 		editTitle: function(){
 			var title = $(".h3title").html();
 			$(".h3title").replaceWith("<input type='text' class='titleinput' value='" + title + "'></input>");
-		},
+		}, //Finishing of the edit - since i have to change the parentID of the ingredients.
 		finishEdit: function(e){
 			if(e.keyCode != 13) return;
 			if(!this.$(".titleinput").val()) return;		
@@ -36,7 +36,7 @@ define(["backbone", "jquery", "underscore", "jade!templates/showDish", "scripts/
 					$(".titleinput").replaceWith("<h3 class='h3title'>" + that.model.get('title') + "</h3>");
 				}
 			});
-		},
+		}, //rendering this view
 		render: function(){
 			console.log(models);
 			this.dishIngredients = models.where({dishTitle: this.model.get('title')});

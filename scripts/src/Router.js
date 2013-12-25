@@ -18,6 +18,7 @@ define(["backbone", "jquery", "underscore", "scripts/collection/DishList", "scri
 					that.ingredients.fetch({
 						success:function(ingredients){
 							$("#hello").append(that.masterView.renderall(dishes).el);
+							//Probably don't need this stuff anymore - saving it just in case (I'm scared..)
 	//						that.appView = new AppView({ el: "#hello", collection: that.collection, ingredients: ingredients});
 	//						that.listenTo(that.appView, "showDish", function(dishTitle){
 	//							that.navigate("showdish/" + dishTitle.dishTitle, {trigger:true});
@@ -30,6 +31,7 @@ define(["backbone", "jquery", "underscore", "scripts/collection/DishList", "scri
 			});
 		},
 		showdish: function(dishName){
+			//Another thing i prolly wont use..
 		//	if(this.showDishview){this.showDishView.remove(); console.log("wat");}
 			var that = this;
 			this.collection.fetch({
@@ -38,6 +40,7 @@ define(["backbone", "jquery", "underscore", "scripts/collection/DishList", "scri
 						return model.get('title') == dishName;
 					});
 					$("#hello").append(that.masterView.renderone(dish).el);
+					//More commented stuff - don't touch it!
 	//				that.showDishView = new ShowDishView({ el: "#hello", model:dish, collection:that.collection, ingredients:that.ingredients});
 	//				that.showDishView.collection = that.ingredients;
 	//				that.showDishView.render();
@@ -46,11 +49,13 @@ define(["backbone", "jquery", "underscore", "scripts/collection/DishList", "scri
 			});
 		},
 		createdish: function(){
+			//Rawr
 		//	if(this.dishView){this.dishView.remove();}
 			var that = this;
 			this.ingredients.fetch({
 				success:function(ingredients){
 					$("#hello").append(that.masterView.rendercreate().el);
+					//My hands are typing words
 	//				that.dishView = new CreateDishView({el:"#hello", collection:that.collection, ingredients:ingredients});
 	//				that.listenTo(that.dishView, "newDishDone", function(){
 	//					that.navigate("",{trigger:true});
@@ -60,7 +65,7 @@ define(["backbone", "jquery", "underscore", "scripts/collection/DishList", "scri
 				}
 			});
 		},
-		//Initialize
+		//Initializes the whole application - i like this function, it's a nice function (Donkey ~ Shrek -01)
 		initialize: function(){
 			this.collection = new DishList();
 			this.ingredients = new Ingredients();
