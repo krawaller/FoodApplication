@@ -38,11 +38,10 @@ define(["backbone", "jquery", "underscore", "jade!templates/showDish", "scripts/
 			});
 		}, //rendering this view
 		render: function(){
-			console.log(models);
 			this.dishIngredients = models.where({dishTitle: this.model.get('title')});
-			console.log(this.dishIngredients);
 			this.$el.empty();
 			this.$el.append(template({ingredients: this.dishIngredients, title: this.model.get('title')}));
+			return this;
 		}
 	});
 });

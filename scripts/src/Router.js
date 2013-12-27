@@ -32,14 +32,13 @@ define(["backbone", "jquery", "underscore", "scripts/collection/DishList", "scri
 		},
 		showdish: function(dishName){
 			//Another thing i prolly wont use..
-		//	if(this.showDishview){this.showDishView.remove(); console.log("wat");}
 			var that = this;
 			this.collection.fetch({
-				success: function(dishes){
-					var dish = dishes.find(function(model){
-						return model.get('title') == dishName;
-					});
-					$("#hello").append(that.masterView.renderone(dish).el);
+				success:function(dishes){
+//					var dish = dishes.find(function(model){
+//						return model.get('title') == dishName;
+//					});
+					//$("#hello").append(that.masterView.renderone(dish).el);
 					//More commented stuff - don't touch it!
 	//				that.showDishView = new ShowDishView({ el: "#hello", model:dish, collection:that.collection, ingredients:that.ingredients});
 	//				that.showDishView.collection = that.ingredients;
@@ -71,7 +70,7 @@ define(["backbone", "jquery", "underscore", "scripts/collection/DishList", "scri
 			this.ingredients = new Ingredients();
 			this.masterView = new MasterView({el:"#hello", collection:this.collection, ingredients:this.ingredients});
 			this.listenTo(this.masterView, "showDish", function(dishTitle){
-				this.navigate("showdish/" + dishTitle.dishTitle, {trigger:true});
+				this.navigate("showdish/" + dishTitle.dishTitle.dishTitle, {trigger:true});
 			});
 			this.listenTo(this.masterView, "newDishDone", function(){
 				this.navigate("", {trigger:true});
