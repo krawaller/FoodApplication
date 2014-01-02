@@ -2,7 +2,7 @@ define(["backbone", "jquery", "underscore", "jade!templates/foodlist"],function(
 	return Backbone.View.extend({
 		initialize: function(options){
 			console.log("Initializing appView");
-			this.listenTo(this.collection, "all", this.render());
+			this.listenTo(this.collection, "all", this.render);
 			this.ingredients = options.ingredients;
 		},
 		template: template,
